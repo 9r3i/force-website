@@ -5,12 +5,12 @@
  * @requires ForceWebsite
  */
 ;function locode(param){
-this.version='2.0.0';
+this.version='2.0.1';
 this.init=function(plug){
   var _locode=this;
   if(ForceWebsite.query.hasOwnProperty('p')){
     this.onContentReady((r,i)=>{
-      if(!r||!/locode/.test(r.innerHTML)){return;}
+      if(!r||!/@\[locode\[/.test(r.innerHTML)){return;}
       var cd=this.convert(r.innerHTML);
       r.innerHTML=cd;
     });
@@ -21,7 +21,7 @@ this.onContentReady=function(cb,i){
   i=i?parseInt(i,10):0;
   var c=document.getElementById('content'),
   _locode=this;
-  if((c&&/locode/.test(c.innerHTML))||i>100){
+  if((c&&/@\[locode\[/.test(c.innerHTML))||i>500){
     return cb(c,i);
   }i++;
   setTimeout(e=>{
