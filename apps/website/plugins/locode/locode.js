@@ -10,7 +10,7 @@ this.init=function(plug){
   var _locode=this;
   if(ForceWebsite.query.hasOwnProperty('p')){
     this.onContentReady((r,i)=>{
-      if(!r||!/@\[locode\[/.test(r.innerHTML)){return;}
+      if(!r||!/@\[locode/.test(r.innerHTML)){return;}
       var cd=this.convert(r.innerHTML);
       r.innerHTML=cd;
     });
@@ -21,7 +21,7 @@ this.onContentReady=function(cb,i){
   i=i?parseInt(i,10):0;
   var c=document.getElementById('content'),
   _locode=this;
-  if((c&&/@\[locode\[/.test(c.innerHTML))||i>500){
+  if((c&&/@\[locode/.test(c.innerHTML))||i>500){
     return cb(c,i);
   }i++;
   setTimeout(e=>{
