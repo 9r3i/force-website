@@ -1,0 +1,17 @@
+/* visitor.css */
+.visitor{
+  margin:0px 0px 10px;
+  padding:20px;
+  text-align:center;
+  background-color:#fff;
+  color:#b37;
+  box-shadow:inset 0px 0px 10px #b37;
+  text-shadow:0px 0px 1px #b37;
+}
+.visitor:before{
+  content:attr(data-prefix);
+  margin-right:10px;
+}
+.visitor:after{
+  content:attr(data-total);
+}

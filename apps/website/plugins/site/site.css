@@ -1,0 +1,219 @@
+/* site.css */
+.site-address{
+  margin:0px;
+  padding:20px;
+  background-color:#b37;
+  color:#fff;
+  text-align:center;
+}
+.site-account{
+  margin:0px 0px 10px;
+  padding:0px;
+  background-color:#fff;
+  background-image:url('images/default.bank.logo.png');
+  background-repeat:no-repeat;
+  background-size:110px 40px;
+  background-position:10px 50px;
+  height:100px;
+  overflow:hidden;
+}
+.site-account-bni{
+  background-image:url('images/default.bank.logo.bni.png');
+}
+.site-account-mandiri{
+  background-image:url('images/default.bank.logo.mandiri.png');
+}
+.site-account-text{
+  line-height:60px;
+  margin:0px 0px 0px 130px;
+  padding:0px;
+}
+.site-account-title{
+  background-color:#b37;
+  color:#fff;
+  margin:0px;
+  padding:0px;
+  height:40px;
+  line-height:40px;
+  text-align:center;
+  font-weight:bold;
+}
+.site-fanpage{
+  margin:0px 0px 10px;
+  padding:0px;
+  background-color:#fff;
+  height:auto;
+  overflow:hidden;
+}
+.site-fanpage-content{
+  margin:0px 0px 0px 0px;
+  padding:10px;
+  overflow:hidden;
+}
+.site-fanpage-title{
+  background-color:#b37;
+  color:#fff;
+  margin:0px;
+  padding:0px;
+  height:40px;
+  line-height:40px;
+  text-align:center;
+  font-weight:bold;
+}
+.site-others{
+  margin:0px;
+  padding:0px;
+}
+.site-others-each{
+  margin:0px 0px 10px;
+  padding:0px;
+  background-color:#fff;
+  height:auto;
+  overflow:hidden;
+}
+.site-others-each-content{
+  margin:0px 0px 0px 0px;
+  padding:10px;
+  overflow:hidden;
+}
+.site-others-each-title{
+  background-color:#b37;
+  color:#fff;
+  margin:0px;
+  padding:0px;
+  height:40px;
+  line-height:40px;
+  text-align:center;
+  font-weight:bold;
+}
+.site-others-each-content div{
+  margin:0px 0px 5px;
+  padding:15px 10px;
+  background-color:#f5f5f5;
+}
+.site-others-each-content div:hover{
+  background-color:#edd;
+}
+.site-links{
+  margin:0px;
+  padding:0px;
+}
+.site-links-each{
+  margin:0px 0px 10px;
+  padding:0px;
+  background-color:#fff;
+  height:auto;
+  overflow:hidden;
+}
+.site-links-each-content{
+  margin:0px 0px 0px 0px;
+  padding:10px;
+  overflow:hidden;
+}
+.site-links-each-title{
+  background-color:#b37;
+  color:#fff;
+  margin:0px;
+  padding:0px;
+  height:40px;
+  line-height:40px;
+  text-align:center;
+  font-weight:bold;
+}
+.site-links-each-content div{
+  margin:0px 0px 5px;
+  padding:15px 10px;
+  background-color:#f5f5f5;
+}
+.site-links-each-content div:hover{
+  background-color:#edd;
+}
+.site-social{
+  margin:0px 0px 10px;
+  padding:0px;
+  background-color:#fff;
+  height:auto;
+  overflow:hidden;
+}
+.site-social-content{
+  margin:0px 0px 0px 0px;
+  padding:10px;
+  overflow:hidden;
+}
+.site-social-title{
+  background-color:#b37;
+  color:#fff;
+  margin:0px;
+  padding:0px;
+  height:40px;
+  line-height:40px;
+  text-align:center;
+  font-weight:bold;
+}
+.site-social-content-each{
+  margin:3px 3px;
+  padding:15px 10px;
+  background-color:#f5f5f5;
+  background-repeat:no-repeat;
+  background-position:10px center;
+  background-size:32px 32px;
+  display:inline-block;
+  width:calc(50% - 6px);
+}
+.site-social-content-each:hover{
+  background-color:#edd;
+}
+.site-social-content-each a{
+  margin:0px 0px 0px 42px;
+}
+.site-social-github{
+  background-image:url("images/github.png");
+}
+.site-social-facebook{
+  background-image:url("images/facebook.png");
+}
+.site-social-twitter{
+  background-image:url("images/twitter.png");
+}
+.site-social-youtube{
+  background-image:url("images/youtube.png");
+}
+.site-social-whatsapp{
+  background-image:url("images/whatsapp.png");
+}
+.site-social-linkedin{
+  background-image:url("images/linkedin.png");
+}
+.site-social-telegram{
+  background-image:url("images/telegram.png");
+}
+.site-social-instagram{
+  background-image:url("images/instagram.png");
+}
+.site-social-pinterest{
+  background-image:url("images/pinterest.png");
+}
+.site-social-tumblr{
+  background-image:url("images/tumblr.png");
+}
+.site-social-playstore{
+  background-image:url("images/playstore.png");
+}
+.site-social-mail{
+  background-image:url("images/mail.png");
+}
+.site-social-default{
+  background-image:url("images/mail.png");
+}
+
+/* media screen */
+@media screen and (min-width:720px){
+  .site-social-content-each{
+    width:calc(25% - 6px);
+  }
+}
+@media screen and (min-width:520px) and (max-width:720px){
+  .site-social-content-each{
+    width:calc(33% - 6px);
+  }
+}

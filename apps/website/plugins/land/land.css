@@ -1,0 +1,35 @@
+/* land.css */
+.land-row{
+  margin:0px 0px 10px;
+  padding:10px;
+  border:1px solid #999;
+  border-radius:5px;
+  box-shadow:1px 1px 5px #999;
+  background-repeat:no-repeat;
+  background-position:10px center;
+  background-size:32px 32px;
+  background-color:transparent;
+  position:relative;
+  height:77px;
+  line-height:50px;
+  overflow:hidden;
+  text-align:center;
+}
+.land-row:hover{
+  box-shadow:1px 1px 9px #999;
+}
+.land-button:focus{background-color:#915;outline:none;}
+.land-button:hover{background-color:#a26;}
+.land-button{
+  background-color:#b37;
+  padding:9px 15px;
+  border:0px none;
+  color:#fff;
+  margin:0px 0px;
+  border-radius:3px;
+  cursor:default;
+  transition:all 0.3s ease 0s;
+  box-shadow:1px 1px 3px #777;
+  outline:none;
+  font-weight:bold;
+}

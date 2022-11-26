@@ -1,0 +1,49 @@
+/* locode.css */
+.locode-section{
+  display:block;
+  position:relative;
+  padding:10px;
+  margin:10px;
+  overflow:auto;
+  background-color:#2b2b2b;
+  color:#ccc;
+  font-family:consolas, monospace;
+  font-size:11px;
+  white-space:pre;
+  border:1px dotted #333;
+}
+.locode-section span,
+.locode-section a{
+  font-family:consolas, monospace;
+  font-size:11px;
+  font-weight:normal;
+  font-style:normal;
+}
+.locode-keyword{
+  color:#7b3;
+  font-weight:bold;
+}
+.locode-comment{
+  color:#777;
+  font-style:italic;
+}
+.locode-variable{
+  color:#59d;
+  font-weight:bold;
+}
+.locode-statement{
+  color:#b37;
+  font-weight:bold;
+}
+.locode-string{
+  color:#fb1;
+}
+.locode-param{
+  color:#7b3;
+}
+.locode-function{
+  color:#dd3;
+}
+.locode-htmltag{
+  color:#37b;
+}

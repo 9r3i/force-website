@@ -1,0 +1,39 @@
+/* slider.css */
+.slider{
+  margin:0px 0px 10px;
+  padding:0px;
+  border:1px solid #999;
+  border-radius:5px;
+  box-shadow:1px 1px 5px #999;
+  background-repeat:no-repeat;
+  background-position:10px center;
+  background-size:32px 32px;
+  background-color:#eed;
+  transition:all 0.5s ease 0s;
+  position:relative;
+  max-height:234px;
+  overflow:hidden;
+  text-align:center;
+}
+.slider div{
+  background-color:transparent;
+  border:0px none;
+  width:100%;
+  text-align:center;
+}
+.slider div img{
+  border:0px none;
+  max-width:100%;
+}
+
+/* media screen */
+@media screen and (min-width:720px){
+  .slider{
+    max-height:450px;
+  }
+}
+@media screen and (min-width:520px) and (max-width:720px){
+  .slider{
+    max-height:324px;
+  }
+}
