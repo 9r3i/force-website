@@ -4,8 +4,10 @@
  * authored by 9r3i
  * https://github.com/9r3i
  * started at november 13th 2022
- * continued at december 1st 2022 to december 13th 2022
+ * continued at december 1st 2022 to december 13th 2022 (2.0.0)
+ * continued at december 17th 2022 (2.1.0)
  * @requires: Force
+ * @output: global ForceWebsite object
  */
 ;function website(app){
 const ForceObject=app.Force;
@@ -14,7 +16,7 @@ Object.defineProperty(this,'Force',{
   writable:false,
 });
 Object.defineProperty(this,'version',{
-  value:'2.0.0',
+  value:'2.1.0',
   writable:false,
 });
 this.root=app.root+'/website/';
@@ -182,8 +184,9 @@ this.fetchAllData=async function(){
 };
 /* prepare theme */
 this.themePrepare=function(themeNS,themeHost,isKitchen,config){
-  var themeRoot=/^https?:/.test(themeHost)?themeHost
-    :this.root+themeHost+'/',
+  var themeRoot=/^https?:/.test(themeHost)
+    ?themeHost+(!themeHost.match(/\/$/)?'/':'')
+    :this.root+themeHost+(!themeHost.match(/\/$/)?'/':''),
   themePath=themeRoot+themeNS+'/',
   themeLogin=themePath+themeNS+'.login.html',
   themeHTML=themePath+themeNS+'.html',
@@ -283,27 +286,37 @@ this.themePrepare=function(themeNS,themeHost,isKitchen,config){
       _this=this,
       el=document.getElementById(file);
       if(!el){
-        if(file.match(/\.js$/i)){
-          if(save){
-            ForceWebsite.loadFile(file,r=>{
-              _this.loadScript(r);
-            });
-          }else{
-            this.loadScriptFile(file);
-          }
-        }else if(file.match(/\.css$/i)){
-          if(save){
-            ForceWebsite.loadFile(file,r=>{
-              _this.loadStyle(r);
-            });
-          }else{
-            this.loadStyleFile(file);
-          }
-        }
+        this.loadFile(file,save);
       }
       setTimeout(e=>{
   	    return _this.loadFiles(files,save,i+1);
       },10);
+    },
+    /* load a file (NO PATH) -- js and css -- helper */
+    loadFile:function(file,save){
+      if(typeof file!=='string'){
+        return;
+      }
+      var _this=this,
+      el=document.getElementById(file);
+      if(el){return;}
+      if(file.match(/\.js$/i)){
+        if(save){
+          ForceWebsite.loadFile(file,r=>{
+            _this.loadScript(r);
+          });
+        }else{
+          this.loadScriptFile(file);
+        }
+      }else if(file.match(/\.css$/i)){
+        if(save){
+          ForceWebsite.loadFile(file,r=>{
+            _this.loadStyle(r);
+          });
+        }else{
+          this.loadStyleFile(file);
+        }
+      }
     },
   };
 };
