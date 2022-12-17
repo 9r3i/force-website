@@ -173,7 +173,7 @@ Next is the calling of the app.
 ```
 
 # Closing
-That's all there is to it. Alhamsulillaah...
+That's all there is to it. Alhamdulillaah...
 
 
 
