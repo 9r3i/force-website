@@ -5,6 +5,7 @@
 [![Stars](https://img.shields.io/github/stars/9r3i/force-website.svg)](https://github.com/9r3i/force-website/stargazers)
 [![Issues](https://img.shields.io/github/issues/9r3i/force-website.svg)](https://github.com/9r3i/force-website/issues)
 [![Release](https://img.shields.io/github/release/9r3i/force-website.svg)](https://github.com/9r3i/force-website/releases)
+[![Donate](https://img.shields.io/badge/donate-paypal-orange.svg)](https://paypal.me/9r3i)
 
 
 # force-website
