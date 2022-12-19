@@ -154,13 +154,13 @@ Next is the calling of the app.
   var ctag=document.getElementById(c), // script tag of website configuration, see configuration section
   ftag=document.getElementById(f), // script tag to load force script
   fname='force/virtual/force.js', // virtual path
-  fscript=localStorage.getItem(fname), // get the force script if it's stored yet
+  fscript=localStorage.getItem(fname), // get the force script if it's already stor
   cnf=JSON.parse(ctag.textContent); // parse the config
-  if(!fscript){
+  if(!fscript){ // check if it's stored
     fscript=await fetch(cnf.force.file).then(r=>r.text()); // fetch the force.js file
-    localStorage.setItem(fname,fscript); // store the force script into virtual file, so next time won't loaded anymore
+    localStorage.setItem(fname,fscript); // store the force script into virtual file, so next time it won't be loaded anymore
   }
-  ftag.textContent=fscript; // loaf the force script
+  ftag.textContent=fscript; // load the force script
   const app=(new Force).app(n,h,cnf); // prepare the app using Force
   await app.init(); // initialize the app
   console.log("A Force app has been loaded, namespace: "
