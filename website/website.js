@@ -6,6 +6,7 @@
  * started at november 13th 2022
  * continued at december 1st 2022 to december 13th 2022 (2.0.0)
  * continued at december 17th 2022 (2.1.0)
+ * continued at december 20th 2022 (2.2.0)
  * @requires: Force
  * @output: global ForceWebsite object
  */
@@ -16,7 +17,7 @@ Object.defineProperty(this,'Force',{
   writable:false,
 });
 Object.defineProperty(this,'version',{
-  value:'2.1.0',
+  value:'2.2.0',
   writable:false,
 });
 this.root=app.root+'/website/';
@@ -55,8 +56,8 @@ this.init=async function(){
   /* load website.css for head-loader style */
   var webStyle=await this.getFileContent(this.root+'website.css');
   ForceObject.loadStyle(webStyle,'website.css');
-  /* fetch all data */
-  await this.fetchAllData();
+  /* fetch config */
+  await this.fetchConfig();
   /* prepare kitchen theme */
   this.kkey='?'+this.config.kitchen.key;
   this.kitchen=this.themePrepare(
@@ -100,16 +101,16 @@ this.init=async function(){
   this.setMeta('author-uri','https://github.com/9r3i');
   this.setMeta('generator','9r3i\\Force\\Website');
   this.setMeta('generator-uri','https://github.com/9r3i/force-website');
-  this.setMeta('generator-version',ForceObject.version);
+  this.setMeta('generator-version',this.version);
   /* popstate */
   window.onpopstate=function(e){
     return ForceWebsite.loadPage(e);
   };
   /* load page */
-  return this.loadPage();
+  return await this.loadPage();
 };
 /* load page */
-this.loadPage=function(e){
+this.loadPage=async function(e){
   /* query object of location.search string */
   this.query=this.parseQuery(location.search.substr(1));
   /* check for theme style and kitchen style element */
@@ -155,11 +156,42 @@ this.loadPage=function(e){
     return;
   }
   /* all data -- using cache */
-  if(this.data){
-    this.setTitle(this.config.site.description);
-    this.theme.load(this.data);
-    return;
+  if(!this.data){
+    /* fetch all data */
+    await this.fetchAllData();
   }
+  this.setTitle(this.config.site.description);
+  this.theme.load(this.data);
+  return;
+};
+/* fetch config -- [site.data] only */
+this.fetchConfig=async function(){
+  var r=await ForceObject.fetch('config.fetch',{
+    database:this.config.data.base,
+  },{
+    method:'GET',
+  });
+  if(typeof r!=='object'
+    ||r===null
+    ||Array.isArray(r)){
+    ForceObject.splash('Error: Failed to fetch config.');
+    r={};
+  }
+  if(!this.config.hasOwnProperty('site')){
+    this.config.site={
+      name:'Site Name',
+      description:'Site Description',
+      keywords:'Site Keywords',
+      robots:'Site Robots',
+      date:{
+        year:'2022',
+        full:'2022-11-13 05:23:36',
+      },
+      data:{},
+    };
+  }
+  this.config.site.data=r;
+  return r;
 };
 /* fetch all data */
 this.fetchAllData=async function(){
