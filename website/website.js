@@ -409,7 +409,7 @@ this.fillPageData=function(content,data){
   data=typeof data==='object'&&data!==null?data:{};
   return content.replace(/{{[a-z0-9\._]+}}(\(.*\))?/ig,m=>{
     var o=m.split('{{')[1].split('}}'),
-        k=m.match(/\(.*\)$/)?m.match(/\((.*)\)$/)[1].split(','):[],
+        k=m.match(/\(.*\)$/)?m.match(/\(([^\)])\)$/)[1].split(','):[],
         j=[],
         n=o[0],
         r=ForceWebsite.findDataSpace(n,data);
