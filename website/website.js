@@ -407,9 +407,9 @@ this.setMeta=function(name,content,key){
 this.fillPageData=function(content,data){
   if(typeof content!=='string'){return content;}
   data=typeof data==='object'&&data!==null?data:{};
-  return content.replace(/{{[a-z0-9\._]+}}(\(.*\))?/ig,m=>{
+  return content.replace(/{{[a-z0-9\._]+}}(\([^\)]*\))?/ig,m=>{
     var o=m.split('{{')[1].split('}}'),
-        k=m.match(/\(.*\)$/)?m.match(/\(([^\)])\)$/)[1].split(','):[],
+        k=m.match(/\(.*\)$/)?m.match(/\(([^\)]*)\)$/)[1].split(','):[],
         j=[],
         n=o[0],
         r=ForceWebsite.findDataSpace(n,data);
