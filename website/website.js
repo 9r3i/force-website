@@ -17,7 +17,7 @@ Object.defineProperty(this,'Force',{
   writable:false,
 });
 Object.defineProperty(this,'version',{
-  value:'2.2.1',
+  value:'2.3.0',
   writable:false,
 });
 this.root=app.root+'/website/';
@@ -42,7 +42,7 @@ this.init=async function(){
   if(!this.config.hasOwnProperty('data')
     ||!this.config.data.hasOwnProperty('host')
     ||!this.config.data.hasOwnProperty('base')){
-    var cfile=typeof this.config==='string'
+    let cfile=typeof this.config==='string'
       ?this.config:'website.config.json',
     cdata=await ForceObject.get(cfile);
     this.config=cdata;
@@ -54,7 +54,7 @@ this.init=async function(){
   this.clearElement=ForceObject.clearElement;
   this.parseQuery=ForceObject.parseQuery;
   /* load website.css for head-loader style */
-  var webStyle=await this.getFileContent(this.root+'website.css');
+  let webStyle=await this.getFileContent(this.root+'website.css');
   ForceObject.loadStyle(webStyle,'website.css');
   /* fetch config */
   await this.fetchConfig();
@@ -81,7 +81,7 @@ this.init=async function(){
   this.plug=await ForceObject.plugin
     .register(this.config.plugins)
     .prepare(this.root+'plugins',e=>{
-      var loaded=Math.floor(e.loaded/e.total*100);
+      let loaded=Math.floor(e.loaded/e.total*100);
       if(ForceWebsite.config.coverLoader){
         ForceObject.loader(
           e.total==e.loaded?false:loaded+'% Loading...',
@@ -89,7 +89,7 @@ this.init=async function(){
             +'Loaded: '+e.loaded+' of '+e.total+' plugins.',
           e.loaded,e.total);
       }else{
-        var plugLoaded=ForceWebsite.plugLoaded||0;
+        let plugLoaded=ForceWebsite.plugLoaded||0;
         ForceWebsite.slideHeadLoader(plugLoaded,loaded);
       }
     });
@@ -114,7 +114,7 @@ this.loadPage=async function(e){
   /* query object of location.search string */
   this.query=this.parseQuery(location.search.substr(1));
   /* check for theme style and kitchen style element */
-  var themeCSS=document.getElementById(this.theme.css),
+  let themeCSS=document.getElementById(this.theme.css),
   kitchenCSS=document.getElementById(this.kitchen.css);
   /* ----- check for kitchen set ----- */
   if(this.hasOwnProperty('kitchenSet')&&this.kitchenSet()){
@@ -166,7 +166,7 @@ this.loadPage=async function(e){
 };
 /* fetch config -- [site.data] only */
 this.fetchConfig=async function(){
-  var r=await ForceObject.fetch('config.fetch',{
+  let r=await ForceObject.fetch('config.fetch',{
     database:this.config.data.base,
   },{
     method:'GET',
@@ -195,7 +195,7 @@ this.fetchConfig=async function(){
 };
 /* fetch all data */
 this.fetchAllData=async function(){
-  var r=await ForceObject.fetch('website.all',{
+  let r=await ForceObject.fetch('website.all',{
     database:this.config.data.base,
   },{
     method:'GET',
@@ -208,7 +208,7 @@ this.fetchAllData=async function(){
   }
   this.bulkRaw=r;
   this.data={};
-  var i=r.length;
+  let i=r.length;
   while(i--){
     this.data[r[i].slug]=r[i];
   }
@@ -216,7 +216,7 @@ this.fetchAllData=async function(){
 };
 /* prepare theme */
 this.themePrepare=function(themeNS,themeHost,isKitchen,config){
-  var themeRoot=/^https?:/.test(themeHost)
+  let themeRoot=/^https?:/.test(themeHost)
     ?themeHost+(!themeHost.match(/\/$/)?'/':'')
     :this.root+themeHost+(!themeHost.match(/\/$/)?'/':''),
   themePath=themeRoot+themeNS+'/',
@@ -246,7 +246,7 @@ this.themePrepare=function(themeNS,themeHost,isKitchen,config){
     getContent:ForceObject.get,
     /* ForceWebsite.theme as return -- ONCE -- NOT helper */
     init:async function(){
-      var script=await this.web.getFileContent(this.js);
+      let script=await this.web.getFileContent(this.js);
       ForceObject.loadScript(script,this.js);
       this.content=await this.web.getFileContent(this.html);
       if(this.isKitchen){
@@ -274,12 +274,12 @@ this.themePrepare=function(themeNS,themeHost,isKitchen,config){
         this.data.post=more;
       }
       /* check loaded script */
-      var eljs=document.getElementById(this.js);
+      let eljs=document.getElementById(this.js);
       if(!eljs){
         ForceObject.loadScriptFile(this.js);
       }
       /* check loaded style */
-      var elcss=document.getElementById(this.css);
+      let elcss=document.getElementById(this.css);
       if(!elcss){
         ForceObject.loadStyleFile(this.css);
       }
@@ -303,7 +303,7 @@ this.themePrepare=function(themeNS,themeHost,isKitchen,config){
       cb=typeof cb==='function'?cb:function(r){
         _this.putHTML(r);
       };
-      var r=await this.web.getFileContent(this.path+file),
+      let r=await this.web.getFileContent(this.path+file),
       res=this.web.fillPageData(r,this.data);
       return cb(res);
     },
@@ -314,7 +314,7 @@ this.themePrepare=function(themeNS,themeHost,isKitchen,config){
         ||!files.hasOwnProperty(i)){
         return;
       }
-      var file=this.path+files[i],
+      let file=this.path+files[i],
       _this=this,
       el=document.getElementById(file);
       if(!el){
@@ -329,7 +329,7 @@ this.themePrepare=function(themeNS,themeHost,isKitchen,config){
       if(typeof file!=='string'){
         return;
       }
-      var _this=this,
+      let _this=this,
       el=document.getElementById(file);
       if(el){return;}
       if(file.match(/\.js$/i)){
@@ -370,7 +370,7 @@ this.finishing=function(){
 /* ============ main methods ============ */
 /* set title */
 this.setTitle=function(txt,asHTML){
-  var webTitle=document.querySelector('title'),
+  let webTitle=document.querySelector('title'),
   webPostTitle=document.getElementById('title');
   if(webPostTitle){
     if(asHTML){
@@ -379,7 +379,7 @@ this.setTitle=function(txt,asHTML){
       webPostTitle.innerText=txt;
     }
   }
-  var suffix=(asHTML?' &#x2015; ':' \u2015 ')
+  let suffix=(asHTML?' &#x2015; ':' \u2015 ')
     +this.config.site.name;
   if(!webTitle){
     webTitle=document.createElement('title');
@@ -394,7 +394,7 @@ this.setTitle=function(txt,asHTML){
 /* set meta tag */
 this.setMeta=function(name,content,key){
   key=typeof key==='string'?key:'name';
-  var tag=document.querySelector('meta['+key+'="'+name+'"]');
+  let tag=document.querySelector('meta['+key+'="'+name+'"]');
   if(!tag){
     tag=document.createElement('meta');
     tag.setAttribute(key,name);
@@ -408,7 +408,7 @@ this.fillPageData=function(content,data){
   if(typeof content!=='string'){return content;}
   data=typeof data==='object'&&data!==null?data:{};
   return content.replace(/{{[a-z0-9\._]+}}(\([^\)]*\))?/ig,m=>{
-    var o=m.split('{{')[1].split('}}'),
+    let o=m.split('{{')[1].split('}}'),
         k=m.match(/\([^\)]*\)$/)
           ?m.match(/\(([^\)]*)\)$/)[1].split(','):[],
         j=[],
@@ -418,8 +418,8 @@ this.fillPageData=function(content,data){
     if(typeof r!=='function'||!m.match(/\(.*\)$/)){
       return r;
     }
-    for(var i of k){
-      var h=ForceWebsite.findDataSpace(i,data,true);
+    for(let i of k){
+      let h=ForceWebsite.findDataSpace(i,data,true);
       j.push(h);
     }
     return ForceWebsite.call(r,j);
@@ -432,13 +432,13 @@ this.findDataSpace=function(n,data,ao){
   }
   data=typeof data==='object'&&data!==null?data:{};
   ao=typeof ao==='boolean'?ao:false;
-  var o=ao?'boolean':'object',
+  let o=ao?'boolean':'object',
       s=n.toString().split('.'),
       h=false,
       r=false,
       t=false,
       u=false;
-  for(var i=0;i<s.length;i++){
+  for(let i=0;i<s.length;i++){
     if(typeof r==='object'&&r.hasOwnProperty(s[i])){
       r=r[s[i]];
     }else if(typeof t==='object'&&t.hasOwnProperty(s[i])){
@@ -469,8 +469,8 @@ this.findDataSpace=function(n,data,ao){
 };
 /* initialize anchor elements */
 this.anchorInit=function(){
-  var ans=document.querySelectorAll('a:not([target="_blank"])');
-  var i=ans.length;
+  let ans=document.querySelectorAll('a:not([target="_blank"])');
+  let i=ans.length;
   while(i--){
     if(!ans[i].href.toString().match(/^javascript/)){
       ans[i].onclick=this.anchorExec;
@@ -481,6 +481,7 @@ this.anchorInit=function(){
 this.anchorExec=function(e){
   e.preventDefault();
   ForceObject.absorbEvent(e);
+  ForceWebsite.slideHeadLoader(0,100,1,1);
   ForceWebsite.go(this.href);
   return false;
 };
@@ -491,15 +492,17 @@ this.go=function(href){
   return this.loadPage();
 };
 /* fetch */
-this.fetch=function(mt,cb,dt){
+this.fetch=function(mt,cb,dt,ul,dl){
   cb=typeof cb==='function'?cb:function(){};
   dt=typeof dt==='object'&&dt!==null?dt:{};
+  ul=typeof ul==='function'?ul:this.loadProgress;
+  dl=typeof dl==='function'?dl:this.loadProgress;
   if(typeof mt!=='string'){return cb(false);}
   dt.database=this.config.data.base;
   ForceObject.fetch(mt,dt,{
     method:'GET',
-    download:this.loadProgress,
-    upload:this.loadProgress,
+    download:dl,
+    upload:ul,
   }).then(cb);
 };
 /* request
@@ -512,6 +515,8 @@ this.fetch=function(mt,cb,dt){
 this.request=function(mt,cb,dt){
   cb=typeof cb==='function'?cb:function(){};
   dt=typeof dt==='object'&&dt!==null?dt:{};
+  ul=typeof ul==='function'?ul:this.loadProgress;
+  dl=typeof dl==='function'?dl:this.loadProgress;
   if(typeof mt!=='string'){return cb(false);}
   dt.database=this.config.data.base;
   dt.method=mt;
@@ -520,8 +525,8 @@ this.request=function(mt,cb,dt){
   if(this.pkey){dt.pkey=this.pkey;}
   ForceObject.fetch(mt,dt,{
     method:'POST',
-    upload:this.loadProgress,
-    download:this.loadProgress,
+    download:dl,
+    upload:ul,
   }).then(cb);
 };
 /* upload file */
@@ -530,10 +535,9 @@ this.upload=function(file,cb,ul){
     await ForceObject.alert(r);
   };
   ul=typeof ul==='function'?ul:this.loadProgress;
-  var url=this.config.data.host,
+  let url=this.config.data.host,
   dt=new FormData,
   hd=null,
-  ul=ul,
   dl=null,
   mt='POST',
   ud4=null;
@@ -546,7 +550,7 @@ this.upload=function(file,cb,ul){
     .toString(0x24));
   ForceObject.stream(url,cb,cb,dt,hd,ul,dl,mt,ud4);
   /* sample -- simple *
-  var xmlhttp=new XMLHttpRequest();
+  let xmlhttp=new XMLHttpRequest();
   xmlhttp.open(mt,url,true);
   xmlhttp.upload.onprogress=ul;
   xmlhttp.onreadystatechange=function(e){
@@ -562,7 +566,7 @@ this.upload=function(file,cb,ul){
 /* load file -- save in virtual file */
 this.loadFile=function(f,cb){
   cb=typeof cb==='function'?cb:function(){};
-  var res=ForceObject.virtualFile(f);
+  let res=ForceObject.virtualFile(f);
   if(res){return cb(res);}
   ForceObject.get(f).then(r=>{
     ForceObject.virtualFile(f,r);
@@ -571,7 +575,7 @@ this.loadFile=function(f,cb){
 };
 /* get file content -- save in virtual file */
 this.getFileContent=async function(f,l){
-  var res=ForceObject.virtualFile(f);
+  let res=ForceObject.virtualFile(f);
   if(!res||l){
     res=await ForceObject.get(f);
     ForceObject.virtualFile(f,res);
@@ -608,7 +612,7 @@ this.__proto__.call=function(fn,args){
 this.onContentReady=function(cb,i){
   cb=typeof cb==='function'?cb:function(){};
   i=i?parseInt(i,10):0;
-  var c=document.getElementById('content');
+  let c=document.getElementById('content');
   if((c&&!/Loading\.{3}/.test(c.innerHTML))||i>500){
     return cb(c&&!/Loading\.{3}/.test(c.innerHTML)?c:false,i);
   }i++;
@@ -618,12 +622,12 @@ this.onContentReady=function(cb,i){
 };
 /* ============ loader / almost stand-alone ============ */
 /* slide head loader */
-this.slideHeadLoader=function(v,m,i){
+this.slideHeadLoader=function(v,m,i,s=10){
   if(this.SLIDE_TIMEOUT){
     clearTimeout(this.SLIDE_TIMEOUT);
   }
-  v=v?Math.max(parseInt(v,10),0):0;
   m=m?Math.min(parseInt(m,10),100):10;
+  v=v?Math.max(parseInt(v,10),0):0;
   i=i?Math.max(parseInt(i,10),v):v;
   if(i>m){
     if(m==100){
@@ -636,11 +640,11 @@ this.slideHeadLoader=function(v,m,i){
   i++;
   this.SLIDE_TIMEOUT=setTimeout(e=>{
     ForceWebsite.slideHeadLoader(v,m,i);
-  },10);
+  },s);
 };
 /* head loader */
 this.headLoader=function(v){
-  var id='head-loader',
+  let id='head-loader',
   hl=document.getElementById(id),
   ht=document.getElementById(id+'-text'),
   hv=hl?hl.firstChild:null;
@@ -671,13 +675,13 @@ this.headLoader=function(v){
 /* load progress */
 this.loadProgress=function(e){
   if(true){return false;}
-  var loaded=Math.floor(e.loaded/e.total*100);
+  let loaded=Math.floor(e.loaded/e.total*100);
   ForceWebsite.headLoader(loaded);
 };
 /* ============ kitchen set ============ */
 /* kitchen set */
 this.kitchenSet=function(x){
-  var kkey=this.kkey.substr(1);
+  let kkey=this.kkey.substr(1);
   if(this.query.hasOwnProperty(kkey)){
     if(x===true){
       /* prepare privilege key */
@@ -705,31 +709,31 @@ this.kitchenSet=function(x){
 /* kitchen form helper -- e = event of submitted form */
 this.kitchenFormHelper=function(e){
   e.preventDefault();
-  var data={};
-  for(var tar of e.target){
+  let data={};
+  for(let tar of e.target){
     if(tar.name){
       data[tar.name]=tar.value;
     }
   }
-  var res={
+  let res={
     data:data,
     submitter:e.submitter,
     target:e.target,
     web:this,
     disable:function(){
-      for(var tr of this.target){
+      for(let tr of this.target){
         tr.disabled=true;
       }return this;
     },
     enable:function(){
-      for(var tr of this.target){
+      for(let tr of this.target){
         tr.disabled=false;
       }return this;
     },
     send:function(mtd,cb,bb){
       cb=typeof cb==='function'?cb:function(){};
       bb=typeof bb==='function'?bb:function(){};
-      var _this=this;
+      let _this=this;
       bb(this);
       this.disable();
       this.web.request(mtd,r=>{
