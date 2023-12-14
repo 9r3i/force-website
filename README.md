@@ -276,9 +276,6 @@ This ```auto-call``` means no need to be worried, because it's only worked insid
 # Closing
 That's all there is to it. Alhamdulillaah...
 
-### Visitors
-[![9r3i/force-website Visitors](https://9r3i.web.id/api/views/?user=9r3i-force-website&color=51,119,187)](https://github.com/9r3i/force-website)
-|---|
-| Since January 18th 2023 |
+
 
 
